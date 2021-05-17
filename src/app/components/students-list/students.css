@@ -1,0 +1,20 @@
+.students-list{
+  width: 300px;
+  height: 700px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+.all-students{
+  margin-top: 10px;
+  width: 290px;
+  margin-left:5px;
+  overflow-x: none;
+  overflow-y: scroll;
+  height: 640px;
+}
+.title{
+  font-size: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
