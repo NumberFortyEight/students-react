@@ -2,26 +2,33 @@ import React,{useState} from 'react';
 import './card.css';
 
 function Card(props) {
-  let [data, setData] = useState([]);
   let [show, setShow] = useState(false);
-
+  let [repository, setRepository] = useState([]);
+  
+  const getRepository = ( url ) =>{
+    fetch(`http://10.3.0.105:8030/api${url}`)
+      .then(data => data.json())
+      .then(data => setRepository(props.create(data)))
+  }
+  
   const createHandler = () => {
-        if(show === false){
-            setData(props.create());
-            setShow(cur=> !cur);
-        }else{
-            setData([]);
-            setShow(cur=> !cur);
+      if(show === false){
+          setShow(cur=> !cur);
+          getRepository(props.href);
+      }else{
+          setShow(cur=> !cur);
+          setRepository([]);
       }
   }
+
   return (
-    <div>
-      <li className="card" onClick={createHandler}>
-        <img className="card-img"src="./user.svg" width="28" height="28"/>
-        <p>student 1</p>
+      <li>
+        <div className="card" onClick={createHandler}>
+          <img className="card-img"src="./user.svg" width="28" height="28" alt="user"/>
+          <p title={props.title}>{props.title}</p>
+        </div>
+        <ul className="sub-card">{repository}</ul>
       </li>
-      <ul className="sub-card">{data}</ul>
-    </div>
   );
 }
 export default Card;

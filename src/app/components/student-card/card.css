@@ -1,5 +1,5 @@
 .card{
-  width: 200px;
+  width: 340px;
   height: 40px;
   margin-left: 20px;
   margin-top: 5px;
@@ -19,8 +19,11 @@
   font-weight: normal;
 }
 .card > p{
-  width: 100%;
+  width: 290px;
   height: 20px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sub-card{
   width: 100%;

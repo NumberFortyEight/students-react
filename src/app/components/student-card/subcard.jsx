@@ -2,12 +2,10 @@ import React from 'react';
 
 function SubCard(props) {
   return (
-    <div>
       <li className="card">
-      <img className="card-img"src="./puzzle.svg" width="28" height="28"/>
-        <p>task</p>
+      <img className="card-img"src="./puzzle.svg" width="28" height="28" alt="task"/>
+        <p>{props.title}</p>
       </li>
-    </div>
   );
 }
 
