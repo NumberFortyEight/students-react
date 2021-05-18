@@ -22,12 +22,6 @@ function Search(){
                         Select commit
                     </p>
             </div>
-            <div className="search-item">
-                <img className="search-img" src="./browser.svg" alt="date" width="22" height="22"/>
-                    <p className="text-item">
-                        Open page
-                    </p>
-            </div>
         </section>
     )
 }
