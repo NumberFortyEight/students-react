@@ -1,10 +1,11 @@
-import React from 'react';
-import TreeCard from './tree-components/tree-card.jsx';
+import React, {useState} from 'react';
 import './tree.css'
-function Tree(){
+
+function Tree(props){
+
     return(
         <div className="Tree">
-            <TreeCard/>
+            {props.create(props.data)}
         </div>
     )
 }

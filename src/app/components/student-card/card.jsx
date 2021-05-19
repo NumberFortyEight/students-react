@@ -11,7 +11,7 @@ function Card(props) {
       .then(data => setRepository(props.create(data)))
   }
   
-  const createHandler = () => {
+  const showHandler = () => {
       if(show === false){
           setShow(cur=> !cur);
           getRepository(props.href);
@@ -23,7 +23,7 @@ function Card(props) {
 
   return (
       <li>
-        <div className="card" onClick={createHandler}>
+        <div className="card" onClick={showHandler}>
           <img className="card-img"src="./user.svg" width="28" height="28" alt="user"/>
           <p title={props.title}>{props.title}</p>
         </div>
