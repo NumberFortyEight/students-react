@@ -1,24 +1,25 @@
 import  React from 'react';
 import './search.css'
-function Search(){
+function Search(props){
+    const getCommits = ( ) =>{
+        let mutableCommitUrl = props.commitUrl + props.url;
+        let mutableUrl = props.url + props.api
+        fetch(mutableCommitUrl)
+            .then(data=>data.json())
+            .then(data=>console.log(data));
+    }
     return(
         <section className="search">
             <input className="search-input" type="text" placeholder="Search"/>
             <div className="search-item">
                 <img className="search-img" src="./calendar.svg" alt="date" width="22" height="22"/>
                 <p className="text-item">
-                    Date 01.02.2021
-                </p>
-            </div>
-            <div className="search-item">
-                <img className="search-img" src="./commit.svg" alt="date" width="22" height="22"/>
-                <p className="text-item">
-                    View commits
+                    Select date
                 </p>
             </div>
             <div className="search-item">
                 <img className="search-img" src="./select.svg" alt="date" width="22" height="22"/>
-                    <p className="text-item">
+                    <p className="text-item" onClick={getCommits}>
                         Select commit
                     </p>
             </div>

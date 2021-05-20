@@ -1,21 +1,39 @@
 import React from 'react';
 import './tree-card.css'
 function TreeCard(props){
-    console.log(props.elem)
     let img;
+    let settings;
+    let mutableUrl = props.url+props.href;
+
     if(props.type === 'FOLDER' || props.type === "REPOSITORY"){
         img = <img src="./folder.svg" width="22" height="22"/>;
+        settings = '';
     }else{
         img = <img src="./file.svg" width="22" height="22"/>;
+        settings = <img onClick={()=>{
+            props.showCode({display: 'flex'})
+            props.sethref(mutableUrl)
+        }} className="tree-card-img" src="./code.svg" alt="date" width="22" height="22"/>;
+    }
+    const getNewData = ( ) =>{
+        if(props.type !== 'FOLDER' && props.type !== "REPOSITORY"){
+            window.open(mutableUrl);
+        }else{
+            fetch(mutableUrl)
+                .then(data => data.json())
+                .then(data => {
+                    props.data(data)
+                    props.setFileUrl(props.href);
+                })
+        }
     }
     return(
         <div className="tree-card">
             {img}
-            <p className="tree-card-item">{props.title}</p>
+            <p className="tree-card-item" onClick={getNewData}>{props.title}</p>
             <p className="tree-card-item"></p>
-            <p className="tree-card-item">20.08.2021</p>
-            <img className="tree-card-img" src="./calendar.svg" alt="date" width="22" height="22"/>
-            <img className="tree-card-img" src="./select.svg" alt="date" width="22" height="22"/>
+            <p className="tree-card-item"></p>
+            {settings}
         </div>
     )
 }

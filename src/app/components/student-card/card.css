@@ -25,6 +25,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.person{
+  font-size: 16px;
+  color: #222831;
+  font-weight: 600;
+  opacity: .5;
+}
 .sub-card{
   width: 100%;
   height: auto;
@@ -38,7 +44,12 @@
 .card:hover .card-img{
   opacity: .8;
 }
-
 .card:active .card-img{
+  opacity: 1;
+}
+.card:hover .person{
+  opacity: .8;
+}
+.card:active .person{
   opacity: 1;
 }

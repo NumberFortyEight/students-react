@@ -25,7 +25,7 @@ function Card(props) {
       <li>
         <div className="card" onClick={showHandler}>
           <img className="card-img"src="./user.svg" width="28" height="28" alt="user"/>
-          <p title={props.title}>{props.title}</p>
+          <p className="person" title={props.title}>{props.title}</p>
         </div>
         <ul className="sub-card">{repository}</ul>
       </li>
