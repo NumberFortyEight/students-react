@@ -7,7 +7,7 @@ function CommitTemplate(props){
     return(
         <section className="commitTemplate" style={{display: props.display}}>
             {elements.map(el=> {
-                return  <CommitCard href={props.href} creater={props.creater} url={props.url} key={props.keyCreator()} message={el.message} date={el.simpleDateFormat}></CommitCard>
+                return  <CommitCard setDisplay={props.setDisplay} href={props.href} creater={props.creater} url={props.url} key={props.keyCreator()} message={el.message} date={el.simpleDateFormat}></CommitCard>
             })}
         </section>
     )

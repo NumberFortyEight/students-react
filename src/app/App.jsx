@@ -40,14 +40,16 @@ function App() {
         }
       })
   }
+  
   const createKey = ( ) =>{
       return Math.floor(Date.now())+Math.random().toString()
   }
+  
   const createRepository = ( data ) =>{
       return data.map(el=><SubCard key={createKey()} title={el.name} click={getTreeData} href={el.href}></SubCard>)
   }
+  
   const createTreeCard = ( data ) =>{
-    console.log(data)
       return data.map(el=><TreeCard sethref={setHref} showCode={setShowCode} setFileUrl = {setFilesystemUrl} url={serverURL} key={createKey()} title={el.name} href={el.href} type={el.state} data={setTreeItems}/>);
   }
   return (

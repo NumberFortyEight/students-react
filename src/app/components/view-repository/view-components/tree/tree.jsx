@@ -14,7 +14,7 @@ function Tree(props){
     return(
         <div className="Tree">
             <button className="prev-Tree"onClick={parsUrl}>
-                назад
+                <img src="./back.svg" alt="back" width="22" height="22"/>
             </button>
             {props.create(props.data, true)}
         </div>

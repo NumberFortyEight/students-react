@@ -5,40 +5,79 @@ import CommitTemplate from '../commits/commit-template.jsx';
 function Search(props){
     let [commits, setCommits] = useState([]);
     let [visible, setVisible] = useState('none');
-    let [deg, setDeg] = useState(0);
+    let mutableCommitUrl = props.commitUrl + props.url;
+    
+    let formatter = new Intl.DateTimeFormat("ru", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+    });
+    
     const getCommits = ( ) =>{
-        let mutableCommitUrl = props.commitUrl + props.url;
         if(visible === 'none'){
             fetch(mutableCommitUrl)
             .then(data=>data.json())
             .then(data=>setCommits(data))
-            .catch( err=>console.log('err'));
+            .catch(()=>console.log('err'));
             setVisible('block');
-            setDeg(180)
         }else{
             setVisible('none');
             setCommits([])
-            setDeg(0)
         }
     }
+    
+    const getCommitsOnDate = ( event ) =>{
+ 
+        setVisible('block');
+        
+        fetch(mutableCommitUrl)
+        .then(data=>data.json())
+        .then(data=>setCommits(()=>{
+           return data.filter(el=>{
+               return Math.round(new Date(event.target.value).getTime()/1000 + 86400) >= el.simpleDateFormat
+            })
+        }))
+        .catch( err=>console.log('err'));
+    }
+
+    const searchCommits = ( event ) =>{
+        setVisible('block');
+
+        fetch(mutableCommitUrl)
+        .then(data=>data.json())
+        .then(data=>setCommits(()=>{
+           return data.filter(el=>{ 
+               return el.message.toLowerCase().includes(event.target.value.toLowerCase())
+            })
+        }))
+        .catch( err=>console.log('err'));
+        
+        if(event.target.value.trim() === ''){
+            setVisible('none')
+        }
+
+        if(commits.length === 0){
+            console.log("Ничего не найдено")
+        }
+     }
     return(
         <>
             <section className="search">
-                <input className="search-input" type="text" placeholder="Search"/>
+                <input onChange={searchCommits} className="search-input" type="text" placeholder="Поиск"/>
                 <div className="search-item">
                     <img className="search-img" src="./calendar.svg" alt="date" width="22" height="22"/>
                     <p className="text-item">
-                        Select date
+                    <input className="focusThis" type='date' onChange={getCommitsOnDate}/>
                     </p>
                 </div>
                 <div className="search-item" onClick={getCommits}>
-                    <img className="search-img" src="./select.svg" style={{transform: `rotate(${deg}deg)`}} alt="date" width="22" height="22"/>
+                    <img className="search-img" src="./select.svg" alt="date" width="22" height="22"/>
                         <p className="text-item">
-                            Select commit
+                            Выбрать коммит
                         </p>
                 </div>
             </section>
-            <CommitTemplate  href={props.href} creater={props.creater} url={props.url} display={visible} commits = {commits} keyCreator={props.keyCreator}></CommitTemplate>
+            <CommitTemplate setDisplay={setVisible} href={props.href} creater={props.creater} url={props.url} display={visible} commits = {commits} keyCreator={props.keyCreator}></CommitTemplate>
         </>
     )
 }
