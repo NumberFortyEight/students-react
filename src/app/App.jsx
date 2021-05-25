@@ -25,7 +25,7 @@ function App() {
         .then(data => data.json())
         .then(data => setStudents(data));
   }
-  const getTreeData = ( dataUrl ) =>{
+  const getTreeData = ( dataUrl, state ) =>{
     let mutableUrl = serverURL + dataUrl;
     fetch(mutableUrl)
       .then(data => data.json())
@@ -33,7 +33,9 @@ function App() {
         if(data?.result){
           alert(data.result);
         }else{
-          setFilesystemUrl(dataUrl);
+          if(state !== false){
+            setFilesystemUrl(dataUrl);
+          }
           setTreeItems(data)
         }
       })
@@ -45,6 +47,7 @@ function App() {
       return data.map(el=><SubCard key={createKey()} title={el.name} click={getTreeData} href={el.href}></SubCard>)
   }
   const createTreeCard = ( data ) =>{
+    console.log(data)
       return data.map(el=><TreeCard sethref={setHref} showCode={setShowCode} setFileUrl = {setFilesystemUrl} url={serverURL} key={createKey()} title={el.name} href={el.href} type={el.state} data={setTreeItems}/>);
   }
   return (
@@ -54,7 +57,7 @@ function App() {
       </StudentsList>
       <ViewRepository>
         <ViewHeader url={filesystemUrl}/>
-        <Search api={serverURL} commitUrl={serverCommitUrl} url={filesystemUrl}/>
+        <Search href={filesystemUrl} creater={getTreeData} keyCreator={createKey} commitUrl={serverCommitUrl} url={filesystemUrl}/>
         <section className="view-content">
           <Tree create={createTreeCard} url={serverURL} data={treeItems} setData={getTreeData} fileUrl ={filesystemUrl} setFileUrl = {setFilesystemUrl}></Tree>
         </section>

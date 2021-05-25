@@ -33,6 +33,7 @@
   
   .search-img{
     opacity: .2;
+    transition-duration: .5s;
   }
   
   .text-item{

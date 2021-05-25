@@ -16,7 +16,7 @@ function Tree(props){
             <button className="prev-Tree"onClick={parsUrl}>
                 назад
             </button>
-            {props.create(props.data)}
+            {props.create(props.data, true)}
         </div>
     )
 }
