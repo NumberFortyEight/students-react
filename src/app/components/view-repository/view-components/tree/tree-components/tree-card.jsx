@@ -14,6 +14,15 @@ function TreeCard(props){
             props.sethref(mutableUrl)
         }} className="tree-card-img" src="./code.svg" alt="date" width="22" height="22"/>;
     }
+
+    let formatter = new Intl.DateTimeFormat("ru", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+    });
+    
     const getNewData = ( ) =>{
         if(props.type !== 'FOLDER' && props.type !== "REPOSITORY"){
             window.open(mutableUrl);
@@ -31,7 +40,7 @@ function TreeCard(props){
             {img}
             <p className="tree-card-item" onClick={getNewData}>{props.title}</p>
             <p className="tree-card-item" title={props.commitName}>{props.commitName}</p>
-            <p className="tree-card-item">{props.commitDate}</p>
+            <p className="tree-card-item">{formatter.format(props.commitDate*1000).replace(',', '')}</p>
             {settings}
         </div>
     )

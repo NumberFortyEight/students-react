@@ -76,7 +76,7 @@ function App() {
   const createTreeCard = ( data ) =>{
       return data.map(el=>{
         return  <TreeCard 
-                  commitDate='01.05.2021'
+                  commitDate={el.commitTime}
                   commit={getCommitName(el.commitTime)}
                   commitName = {commit} 
                   sethref={setHref} 
