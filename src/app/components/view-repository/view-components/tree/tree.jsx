@@ -6,9 +6,13 @@ function Tree(props){
         let arrUrl = props.fileUrl.split('/');
         arrUrl.pop()
         arrUrl = arrUrl.join('/');
+
         if(arrUrl.includes('.git')){
             props.setData(arrUrl)
+        }else{
+            fetch('http://')
         }
+        
     }
 
     return(

@@ -14,12 +14,15 @@ import './app.css';
 const serverURL          = 'http://10.3.105:8030/api';
 const serverCommitUrl    = 'http://10.3.105:8030/commit';
 
+
 function App() {
   let [students, setStudents] = useState([]);
   let [treeItems, setTreeItems] = useState([]);
   let [filesystemUrl, setFilesystemUrl] = useState('')
   let [showCode, setShowCode] = useState({display: 'none'});
   let [Href, setHref] = useState('');
+  let [parentHref, setParentHref] = useState('');
+  let [commit, setCommit] = useState('');
 
   window.onload = function(){
       fetch(serverURL)
@@ -47,23 +50,72 @@ function App() {
   }
   
   const createRepository = ( data ) =>{
-      return data.map(el=><SubCard key={createKey()} title={el.name} click={getTreeData} href={el.href}></SubCard>)
+      return data.map(el=>{
+        return  <SubCard 
+                  key={createKey()} 
+                  title={el.name} 
+                  click={getTreeData} 
+                  href={el.href}
+                  setParentHref={setParentHref}
+                  />
+              })
   }
-  
+  const getCommitName = ( commit ) =>{
+    fetch(serverCommitUrl + parentHref + '/allcommits')
+      .then(data=>data.json())
+      .then(data=>{
+        data.map(el=>{
+          if(+el.simpleDateFormat === commit){
+            setCommit(el.message)
+          }
+        })
+      })
+
+  }
+
   const createTreeCard = ( data ) =>{
-      return data.map(el=><TreeCard sethref={setHref} showCode={setShowCode} setFileUrl = {setFilesystemUrl} url={serverURL} key={createKey()} title={el.name} href={el.href} type={el.state} data={setTreeItems}/>);
+      return data.map(el=>{
+        return  <TreeCard 
+                  commitDate='01.05.2021'
+                  commit={getCommitName(el.commitTime)}
+                  commitName = {commit} 
+                  sethref={setHref} 
+                  showCode={setShowCode} 
+                  setFileUrl = {setFilesystemUrl} 
+                  url={serverURL} 
+                  key={createKey()} 
+                  title={el.name} 
+                  href={el.href} 
+                  type={el.state} 
+                  data={setTreeItems}
+        />});
   }
   return (
     <section className="main-content">
       <StudentsList>
-        {students.map(el=><Card key={createKey()} create={createRepository} title={el.name} href={el.href}/>)}
+        {students.map(el=>{
+         return <Card key={createKey()} 
+                  create={createRepository} 
+                  title={el.name} 
+                  href={el.href}/>
+        })}
       </StudentsList>
       <ViewRepository>
         <ViewHeader url={filesystemUrl}/>
-        <Search href={filesystemUrl} creater={getTreeData} keyCreator={createKey} commitUrl={serverCommitUrl} url={filesystemUrl}/>
-        <Filter />
+        <Search href={filesystemUrl} 
+              creater={getTreeData} 
+              keyCreator={createKey} 
+              commitUrl={serverCommitUrl} 
+              url={filesystemUrl}
+        />
         <section className="view-content">
-          <Tree create={createTreeCard} url={serverURL} data={treeItems} setData={getTreeData} fileUrl ={filesystemUrl} setFileUrl = {setFilesystemUrl}></Tree>
+          <Tree create={createTreeCard} 
+              url={serverURL} 
+              data={treeItems} 
+              setData={getTreeData} 
+              fileUrl ={filesystemUrl} 
+              setFileUrl = {setFilesystemUrl}
+          />
         </section>
       </ViewRepository>
       <ViewCode style={showCode} showCode={setShowCode} href={Href}/>

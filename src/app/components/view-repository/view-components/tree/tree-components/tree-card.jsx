@@ -4,7 +4,6 @@ function TreeCard(props){
     let img;
     let settings;
     let mutableUrl = props.url+props.href;
-
     if(props.type === 'FOLDER' || props.type === "REPOSITORY"){
         img = <img src="./folder.svg" width="22" height="22"/>;
         settings = '';
@@ -31,8 +30,8 @@ function TreeCard(props){
         <div className="tree-card">
             {img}
             <p className="tree-card-item" onClick={getNewData}>{props.title}</p>
-            <p className="tree-card-item"></p>
-            <p className="tree-card-item"></p>
+            <p className="tree-card-item" title={props.commitName}>{props.commitName}</p>
+            <p className="tree-card-item">{props.commitDate}</p>
             {settings}
         </div>
     )

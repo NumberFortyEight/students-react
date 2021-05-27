@@ -43,7 +43,7 @@
     overflow: hidden;
     opacity: .4;
     display: none;
-    width: 250px;
+    width: 380px;
   }
   .search-item:hover .text-item{
     opacity: .8;
@@ -53,5 +53,16 @@
     opacity: .8;
   }
   .search-item:hover{
+    width: 380px;
+  }
+  .search-item-i:hover{
     width: 200px;
+  }
+  .search-item_date{
+    text-align: center;
+    width: 100px;
+    height: 30px;
+    margin: 5px;
+    background-color: #eee;
+    background-color: 5px;
   }
