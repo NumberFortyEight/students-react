@@ -4,15 +4,22 @@ function TreeCard(props){
     let img;
     let settings;
     let mutableUrl = props.url+props.href;
+    
     if(props.type === 'FOLDER' || props.type === "REPOSITORY"){
         img = <img src="./folder.svg" width="22" height="22"/>;
         settings = '';
     }else{
         img = <img src="./file.svg" width="22" height="22"/>;
-        settings = <img onClick={()=>{
-            props.showCode({display: 'flex'})
-            props.sethref(mutableUrl)
-        }} className="tree-card-img" src="./code.svg" alt="date" width="22" height="22"/>;
+        settings = function(){    
+            return (
+                    <img className="tree-card-img" src="./code.svg" alt="date" width="22" height="22" 
+                        onClick={()=>{
+                            props.showCode({display: 'flex'})
+                            props.sethref(mutableUrl)
+                        }} 
+                    />
+                )
+        }();
     }
 
     let formatter = new Intl.DateTimeFormat("ru", {

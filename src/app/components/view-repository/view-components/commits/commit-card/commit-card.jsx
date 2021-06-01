@@ -13,11 +13,10 @@ function CommitCard(props){
 
     const fetchCommit = ( arg ) =>{
         let url = props.href+'?commit='+arg;
-        console.log(props.href)
         props.creater(url, false);
         props.setDisplay('none');
-        alert(`Коммит  ${props.message}  применен!`)
     }  
+    
     return(
         <div className="commitCard" onClick={()=>fetchCommit(props.date)}>
             <p className="commitMessage">{props.message}</p>

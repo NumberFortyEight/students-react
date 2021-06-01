@@ -10,8 +10,8 @@ function ViewCode(props){
     })    
     return(
         <div className="bg-view" style={props.style}>
-               <div className="ViewCode">
-               <img className="closeBtn" onClick={()=>props.showCode({display:"none"})} src="./close.svg" alt="close" width="22" height="22" />
+                <div className="ViewCode">
+                <img className="closeBtn" onClick={()=>props.showCode({display:"none"})} src="./close.svg" alt="close" width="22" height="22" />
                 <pre id="code" className="ViewContent">
                     {code}        
                 </pre>

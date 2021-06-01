@@ -9,17 +9,18 @@ function Tree(props){
 
         if(arrUrl.includes('.git')){
             props.setData(arrUrl)
-        }else{
-            fetch('http://')
+            fetch(`http://10.3.0.105:8030/api${arrUrl}?drop=all`)       
         }
-        
     }
 
     return(
         <div className="Tree">
-            <button className="prev-Tree"onClick={parsUrl}>
-                <img src="./back.svg" alt="back" width="22" height="22"/>
-            </button>
+            <div style={{display:"block", width:"100%",height:"40px"}}>
+                <button style={{float:'left'}} className="prev-Tree"onClick={parsUrl}>
+                    <img src="./back.svg" alt="back" width="22" height="22"/>
+                </button>
+                <p className="commit-naming" title={props.commit}>Commit: {props.commit}</p>
+            </div>
             {props.create(props.data, true)}
         </div>
     )

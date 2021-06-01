@@ -1,20 +1,20 @@
 .ViewCode{
     background-color: #fff;
     width: 1000px;
-    height: 700px;
+    height: 650px;
     border-radius: 4px;
     padding: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     font-size: 15px;
-    overflow: scroll;
+    position: absolute;
 }
 .closeBtn{
     width: 22px;
     height: 22px;
-    position: fixed;
-    margin-left: -100px;
-    margin-top: -25px;
-    padding: 10px;
+    position: absolute;
+    top:10px;
+    right:10px;
+    padding:10px;
     transition: .5s;
     border-radius: 5px;
     border: 2px solid #212121;
@@ -32,9 +32,15 @@
     position: fixed;
     z-index: 900;
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    padding-top: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.2);   
+}
+.ViewContent{
+    margin-top: 35px;
+    height: 630px;
+    overflow: scroll;
 }
