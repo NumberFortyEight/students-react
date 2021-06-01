@@ -8,7 +8,12 @@ function Card(props) {
   const getRepository = ( url ) =>{
     fetch(`http://10.3.0.105:8030/api${url}`)
       .then(data => data.json())
-      .then(data => setRepository(props.create(data)))
+      .then(data => {
+        console.log(data)
+        if(Array.isArray(data)){
+            setRepository(props.create(data))
+          }
+      })
   }
   
   const showHandler = () => {

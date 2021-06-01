@@ -38,7 +38,7 @@ function App() {
     fetch(mutableUrl)
       .then(data => data.json())
       .then(data => {
-        if(data?.result){
+        if(data.result === 'Exception of load commit'){
           alert(data.result);
         }else{
           if(state !== false){
