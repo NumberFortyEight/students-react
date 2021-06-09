@@ -1,8 +1,8 @@
 import  React, {useState} from 'react';
 import  './search.css';
 import  CommitTemplate from '../commits/commit-template.jsx';
-import moment from 'moment';
-
+import  moment from 'moment';
+import config from "../../../../../config.json"
 function Search(props){
     let [commits, setCommits] = useState([]);
     let [visible, setVisible] = useState('none');
@@ -12,7 +12,7 @@ function Search(props){
         if(visible === 'none'){
             fetch(mutableCommitUrl)
                 .then(data=>data.json())
-                .then(data=>setCommits(data))
+                .then(data=>{setCommits(data)})
                 .catch(()=>console.log('err'));
                 setVisible('block');
         }else{
@@ -51,6 +51,7 @@ function Search(props){
         .then(data=>data.json())
         .then(data=>setCommits(()=>{
             return data.filter(el=>{ 
+                console.log(el)
                 return el.message.toLowerCase().includes(event.target.value.toLowerCase())
             })
         }))
@@ -66,7 +67,7 @@ function Search(props){
             <section className="search">
                 <input onChange={searchCommits} className="search-input" type="text" placeholder="Поиск"/>
                 <div className="search-item search-item__item">
-                    <img className="search-img" src="./calendar.svg" alt="date" width="22" height="22"/>
+                    <img className="search-img" src={config.img.calendar} alt="date" width="22" height="22"/>
                     <div className="text-item">
                         <input id="date-date" className='search-item_date' defaultValue="31.12.2021"type='text'/>
                         <input id="time-date" className='search-item_date' defaultValue="00:00" type='text'/>
@@ -74,7 +75,7 @@ function Search(props){
                     </div>
                 </div>
                 <div className="search-item search-item-i" onClick={getCommits}>
-                    <img className="search-img" src="./select.svg" alt="date" width="22" height="22"/>
+                    <img className="search-img" src={config.img.select} alt="date" width="22" height="22"/>
                     <p className="text-item">
                         Выбрать коммит
                     </p>

@@ -15,6 +15,7 @@ function CommitCard(props){
         let url = props.href+'?commit='+arg;
         props.creater(url, false);
         props.setDisplay('none');
+        console.log(url)
     }  
     
     return(

@@ -1,25 +1,28 @@
 import React from 'react';
-import './tree-card.css'
+import './tree-card.css';
+import config from "../../../../../../config.json"
 function TreeCard(props){
     let img;
     let settings;
     let mutableUrl = props.url+props.href;
     
     if(props.type === 'FOLDER' || props.type === "REPOSITORY"){
-        img = <img src="./folder.svg" width="22" height="22"/>;
+        img = <img src={config.img.folder} width="22" height="22"/>;
         settings = '';
     }else{
-        img = <img src="./file.svg" width="22" height="22"/>;
-        settings = function(){    
-            return (
-                    <img className="tree-card-img" src="./code.svg" alt="date" width="22" height="22" 
-                        onClick={()=>{
-                            props.showCode({display: 'flex'})
-                            props.sethref(mutableUrl)
-                        }} 
-                    />
-                )
-        }();
+        img = <img src={config.img.file} width="22" height="22"/>;
+        for(let i = 0; i<config.supportImageFormat.length; i++){
+            settings = function(){    
+                return (
+                        <img className="tree-card-img" src={config.img.code} alt="date" width="22" height="22" 
+                            onClick={()=>{
+                                props.showCode({display: 'flex'})
+                                props.sethref(mutableUrl)
+                            }} 
+                        />
+                    )
+            }();
+        }
     }
 
     let formatter = new Intl.DateTimeFormat("ru", {

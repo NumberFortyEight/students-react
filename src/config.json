@@ -1,0 +1,22 @@
+{
+    "url":{
+        "commitURL": "http://10.3.105:8030/commit",
+        "serverURL": "http://10.3.105:8030/api"
+    },
+    "img":{
+        "back":"./back.svg",
+        "browser":"./browser.svg",
+        "calendar":"./calendar.svg",
+        "close":"./close.svg",
+        "code":"./code.svg",
+        "commit":"./commit.svg",
+        "file":"./file.svg",
+        "folder":"./folder.svg",
+        "puzzle":"./puzzle.svg",
+        "select":"./select.svg",
+        "user":"./user.svg"
+    },
+    "supportImageFormat":[
+        ".svg", ".png"
+    ]
+}

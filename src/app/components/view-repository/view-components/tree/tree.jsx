@@ -1,6 +1,6 @@
 import React from 'react';
 import './tree.css'
-
+import config from "../../../../../config.json"
 function Tree(props){
     const parsUrl = ( ) =>{
         let arrUrl = props.fileUrl.split('/');
@@ -9,7 +9,7 @@ function Tree(props){
 
         if(arrUrl.includes('.git')){
             props.setData(arrUrl)
-            fetch(`http://10.3.0.105:8030/api${arrUrl}?drop=all`)       
+            fetch(`${config.url.serverURL}${arrUrl}?drop=all`)       
         }
     }
 
@@ -17,7 +17,7 @@ function Tree(props){
         <div className="Tree">
             <div style={{display:"block", width:"100%",height:"40px"}}>
                 <button style={{float:'left'}} className="prev-Tree"onClick={parsUrl}>
-                    <img src="./back.svg" alt="back" width="22" height="22"/>
+                    <img src={config.img.back} alt="back" width="22" height="22"/>
                 </button>
                 <p className="commit-naming" title={props.commit}>Commit: {props.commit}</p>
             </div>

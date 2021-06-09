@@ -9,13 +9,10 @@ import Search            from './components/view-repository/view-components/sear
 import Tree              from './components/view-repository/view-components/tree/tree.jsx';
 import TreeCard          from './components/view-repository/view-components/tree/tree-components/tree-card.jsx';
 import ViewCode          from './components/view-code/code.jsx'
+import config from '../config.json'
 
-// import Filter            from './components/filter/filter.jsx'
-
-
-
-const serverURL          = 'http://10.3.105:8030/api';
-const serverCommitUrl    = 'http://10.3.105:8030/commit';
+const serverURL          =  config.url.serverURL;
+const serverCommitUrl    =  config.url.commitURL;
 
 
 function App() {

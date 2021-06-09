@@ -1,12 +1,12 @@
-import React,{useEffect, useState} from 'react';
+import React,{useState} from 'react';
 import './card.css';
-
+import config from "../../../config.json";
 function Card(props) {
   let [show, setShow] = useState(false);
   let [repository, setRepository] = useState([]);
   
   const getRepository = ( url ) =>{
-    fetch(`http://10.3.0.105:8030/api${url}`)
+    fetch(`${config.url.serverURL}${url}`)
       .then(data => data.json())
       .then(data => {
         console.log(data)
@@ -29,7 +29,7 @@ function Card(props) {
   return (
       <li>
         <div className="card" onClick={showHandler}>
-          <img className="card-img"src="./user.svg" width="28" height="28" alt="user"/>
+          <img className="card-img"src={config.img.user} width="28" height="28" alt="user"/>
           <p className="person" title={props.title}>{props.title}</p>
         </div>
         <ul className="sub-card">{repository}</ul>
